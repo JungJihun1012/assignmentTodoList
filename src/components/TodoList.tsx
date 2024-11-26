@@ -10,10 +10,14 @@ const TodoList: React.FC = () => {
     const [todos, setTodos] = useState<TodoType[]>([]);
     const [input, setInput] = useState<string>("");
 
+    // localStorage.getItem 값을 찾고 자바스크립트 객체로 반환
     useEffect(() => {
         const save = localStorage.getItem("todos");
         if(save) setTodos(JSON.parse(save));
     }, []);
+
+    // localStorage.setItem으로 key - value 형식으로 문자열로 반환
+
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
@@ -23,6 +27,9 @@ const TodoList: React.FC = () => {
             setTodos([...todos, {text: input, completed: false}]);
         }
             setInput(""); // 값 초기화
+        if(input == "") {
+            alert("값이 비어있습니다.");
+        }
     }
     const hanldeKey = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -43,6 +50,7 @@ const TodoList: React.FC = () => {
             setTodos(todos.filter((_, i) => i !== idx));
         }
     }
+    
     return(
         <Container>
             <TodoTitle>TodoList</TodoTitle>
@@ -129,11 +137,15 @@ const Item = styled.div`
     align-items: center;
 `;
 const Text = styled.div`
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
     text-decoration: ${({completed}) => (completed ? "line-through" : "none")};
     color: ${({completed}) => (completed ? "lightgray" : "black")};
     transition: .4s;
+    &:hover {
+        font-size: 24px;
+        color: #a92f22;
+    }
 `;
 const DeleteButton = styled.div`
     font-size: 20px;
