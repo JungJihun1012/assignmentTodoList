@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import TodoList from "./components/TodoList";
+// import TodoList from "./components/TodoList";
+import Todo from "./components/Todo";
 
 function App() {
   return(
     <Container>
-      <TodoList />
+      <Todo />
     </Container>
   )
 }
