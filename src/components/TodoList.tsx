@@ -21,8 +21,12 @@ const TodoList: React.FC = () => {
 
     const add = () => {
         if(input.trim() !== "") {
+            // trim은 공백을 없애주는 함수 
+            // 쉽게 말하면 input에 값이 비어있지 않을 경우
             setTodos([...todos, {text: input, completed: false}]);
+            // todo 배열을 복사하고, text는 input에 값, completed는 false로 가져온다
             setInput(""); 
+            // input 값 초기화까지
         }
         if(input == "") {
             alert("값이 비어있습니다.");
@@ -32,20 +36,28 @@ const TodoList: React.FC = () => {
         if (e.key === "Enter") {
             add();
         }
+        // 이거는 이벤트 키가 Enter와 같을 때 추가하는 함수
     }
+
+
     const toggle = (index: number) => {
         const newTodo = todos.map((todo, i) => {
+            // map 함수를 사용하여 새로운 배열을 추가할 계획
             if(i === index) {
                 return {...todo, completed: !todo.completed};
             }
+            // 만약 i 가 index와 타입이 같을 때 todo의 배열을 복사하고, complted는 todo에 completed가 아닌 것을 반환
             return todo;
+            // if문이 끝나면 todo를 반환해줌
         });
         setTodos(newTodo);
     };
+
     const del = (idx: number) => {
         if(window.confirm("정말로 삭제하시겠습니까?")) {
             setTodos(todos.filter((_, i) => i !== idx));
         }
+        // 만약 삭제한다면 filter 배열메서드를 사용해서 해당 인덱스를 제외한 배열을 업데이트 하는 공식
     }
     
     return(
@@ -64,12 +76,15 @@ const TodoList: React.FC = () => {
             ): (
             <List>
                 {todos.map((todo, index)=>(
+                    // 여기도 todo에 새로운 배열을 추가하고
                     <Item key={index}>
                         <Text
                             onClick={() => toggle(index)}
+                            // 아까 만들었던 toggle 함수를 삽입
                             completed={todo.completed}
                         >
                             {todo.text}
+                            {/* 텍스트 반영 */}
                         </Text>
                         <DeleteButton
                             onClick={() => del(index)}
