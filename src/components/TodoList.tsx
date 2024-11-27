@@ -67,7 +67,6 @@ const TodoList: React.FC = () => {
             ): (
             <List>
                 {todos.map((todo, index)=>(
-                    // 여기도 todo에 새로운 배열을 추가하고
                     <Item key={index}>
                         <Text
                             onClick={() => toggle(index)}
