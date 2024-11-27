@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface TodoType {
-    text: string,
-    completed: React.ReactNode,
+    text: string | null,
+    completed: boolean | null,
 }
 
 const TodoList: React.FC = () => {
