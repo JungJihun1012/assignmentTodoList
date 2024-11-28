@@ -9,19 +9,20 @@ interface TodoType {
 const TodoList: React.FC = () => {
     const [todos, setTodos] = useState<TodoType[]>([]);
     const [input, setInput] = useState<string>("");
-
+    
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
+    
     useEffect(() => {
         const save = localStorage.getItem("todos");
         if(save) setTodos(JSON.parse(save));
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos));
-    }, [todos]);
 
     const add = () => {
         if(input.trim() !== "") {
-            setTodos([...todos, {text: input, completed: false}]);
+            setTodos( [...todos, {text: input, completed: false}]);
             setInput(""); 
         }
         if(input == "") {
