@@ -64,6 +64,7 @@ const TodoList: React.FC = () => {
                 />
                 <AddBtn onClick={add}>+</AddBtn>
             </TodoContent>
+            // 이 조건부 렌더링은 Todo List가 비어 있을 때와 항목이 있을 때의 UI를 다르게 표시하기 위해 사용됩니다. Todo가 없을 때는 아무것도 표시하지 않고, Todo가 있을 때는 목록을 보여주는 방식으로 사용자 경험을 개선하는 방식
             {todos.length == 0 ? (<></>
             ): (
             <List>
